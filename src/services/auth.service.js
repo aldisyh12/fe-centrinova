@@ -66,7 +66,11 @@ class AuthService {
     }
 
     profile(id) {
-        return Api.doGet(Host.API_V1 + `/user/update/profile/${id}`);
+        return Api.doGet(Host.API_V1 + `/user/show/profile/${id}`);
+    }
+
+    changePassword(id, payloads) {
+        return Api.doPost(Host.API_V1 + `/user/update/profile/${id}`, payloads);
     }
 }
 

@@ -7,13 +7,13 @@
           <v-container>
             <v-text-field
                 label="Name"
-                v-model="login.password"
+                v-model="detailUser.name"
                 disabled
             ></v-text-field>
 
             <v-text-field
                 label="Email"
-                v-model="login.password"
+                v-model="detailUser.email"
                 disabled
             ></v-text-field>
 
@@ -49,14 +49,15 @@
 
 <script>
 import RequestLogin from "@/payload/request/RequestLogin";
-import PostUserService from "@/services/postUser.service";
-import RequestPostUser from "@/payload/request/RequestPostUser";
 import AuthService from "@/services/auth.service";
+import VueCookies from "vue-cookies";
+import Utils from "@/helpers/Utils";
 
 export default {
   name: "UpdatePassword",
   data: () => ({
     login: new RequestLogin(),
+    detailUser: {},
     valid: true,
     email: '',
     emailRules: [
@@ -64,19 +65,34 @@ export default {
       v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
     password: '',
+    user: {},
   }),
+  created() {
+    this.user = Utils.jwtDecode(
+        JSON.parse(JSON.stringify(VueCookies.get("__MIH__BASE__SESSIONID__"))).access_token
+    );
+    this.getProfile();
+  },
   methods: {
-    async onSubmit() {
-      await AuthService.profile(this.postUser).then((response) => {
+    getProfile() {
+      AuthService.profile(this.user.id).then((response) => {
         if (response.code === 200) {
-          this.postUser = new RequestPostUser();
+          this.detailUser = response.data;
+        } else {
+          console.log(response)
+        }
+      })
+    },
+    async onSubmit() {
+      await AuthService.changePassword(this.detailUser.id, this.login).then((response) => {
+        if (response.code === 200) {
+          this.login = new RequestLogin();
           this.$router.push('/dashboard');
         } else {
           console.log(response)
         }
       });
     },
-    getProfile(){}
   },
 }
 </script>

@@ -17,6 +17,10 @@ class PostUserService {
     deletePost(id) {
         return Api.doDelete(Host.API_V1 + `/user/post/delete/${id}`);
     }
+
+    updatePost(id, payload) {
+        return Api.doPost(Host.API_V1 + `/user/post/update/${id}`, payload);
+    }
 }
 
 export default new PostUserService();

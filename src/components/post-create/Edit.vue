@@ -31,7 +31,12 @@
                   required
               ></v-text-field>
 
-              <v-file-input label="Upload Gambar" prepend-icon="mdi-camera"></v-file-input>
+              <v-file-input
+                  label="Upload Gambar"
+                  prepend-icon="mdi-camera"
+                  accept="image/*"
+                  @change="onFileChange"
+              ></v-file-input>
 
               <v-btn
                   color="success"
@@ -58,17 +63,51 @@ export default {
   data: () => ({
     postUser: new RequestPostUser(),
   }),
+  mounted() {
+    this.getDetailPost();
+  },
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      PostUserService.createPost(this.postUser).then((response) => {
+      PostUserService.updatePost(this.postUser.id, this.postUser).then((response) => {
         if (response.code === 200) {
+          this.getDetailPost();
           this.postUser = new RequestPostUser();
           this.$router.push('/dashboard');
         } else {
           console.log(response)
         }
       });
+    },
+    getDetailPost(){
+      PostUserService.getPost(this.$route.params.id).then((response) => {
+        if(response.code === 200){
+          this.postUser = response.data;
+        }else{
+          console.log(response)
+        }
+      });
+    },
+    /**
+     * Image Change
+     * @param e
+     */
+    onFileChange(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+
+    /**
+     * Convert image to bas64
+     * @param file
+     */
+    createImage(file) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.postUser.images = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
   },
 }
