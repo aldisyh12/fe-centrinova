@@ -75,14 +75,25 @@ export default {
         }
       });
     },
+    /**
+     * Image Change
+     * @param e
+     */
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
     },
+
+    /**
+     * Convert image to bas64
+     * @param file
+     */
     createImage(file) {
-      let reader = new FormData();
-      reader.append('images', this.post.thumbnail);
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.postUser.images = e.target.result;
+      };
       reader.readAsDataURL(file);
     },
   },

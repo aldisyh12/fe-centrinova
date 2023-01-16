@@ -26,6 +26,9 @@
               Description
             </th>
             <th class="text-center">
+              Images
+            </th>
+            <th class="text-center">
               Dibuat
             </th>
             <th class="text-center">
@@ -41,6 +44,7 @@
             <td>{{ item.judul }}</td>
             <td>{{ item.categories }}</td>
             <td>{{ item.description }}</td>
+            <td><img :src="item.images"/></td>
             <td>{{ format_date(item.created_at) }}</td>
             <td>
               <v-btn color="primary" variant="flat" @click="handleEdit(item.id)">Edit</v-btn>
