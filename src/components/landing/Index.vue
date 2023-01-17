@@ -69,6 +69,35 @@
           <TemplateSidebar />
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-card style="background: #6a6ac5">
+            <h1 style="color: #FFF" class="text-center mb-5 mt-5">Popular Post Section</h1>
+            <v-row>
+              <v-col cols="2"></v-col>
+              <v-col cols="4" class="justify-center text-center">
+                <v-card class="mb-5">
+                  <v-img
+                      cover
+                      height="250"
+                      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                  ></v-img>
+                </v-card>
+              </v-col>
+              <v-col cols="4" class="justify-center text-center">
+                <v-card class="mb-5">
+                  <v-img
+                      cover
+                      height="250"
+                      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                  ></v-img>
+                </v-card>
+              </v-col>
+              <v-col cols="2"></v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
 </template>
 
