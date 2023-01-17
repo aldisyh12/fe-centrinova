@@ -98,6 +98,38 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-card style="background-color: #FFFFFF">
+            <v-row class="mb-8 mt-8">
+            <v-col cols="2">
+            </v-col>
+            <v-col cols="2">
+              <h1 class="text-center">Vue Blogs</h1>
+            </v-col>
+            <v-col cols="2">
+              <h2 class="text-center">Website</h2>
+              <h4 class="text-center">Blog</h4>
+              <h4 class="text-center">Post</h4>
+              <h4 class="text-center">Categories</h4>
+            </v-col>
+              <v-col cols="2">
+                <h2 class="text-center">Website</h2>
+                <h4 class="text-center">Blog</h4>
+                <h4 class="text-center">Post</h4>
+                <h4 class="text-center">Categories</h4>
+              </v-col>
+              <v-col cols="2">
+                <h2 class="text-center">Website</h2>
+                <h4 class="text-center">Blog</h4>
+                <h4 class="text-center">Post</h4>
+                <h4 class="text-center">Categories</h4>
+              </v-col>
+            <v-col cols="2"></v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
 </template>
 
